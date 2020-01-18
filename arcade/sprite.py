@@ -91,7 +91,7 @@ class Sprite:
     """
 
     def __init__(self,
-                 filename: str = None,
+                 name: str = None,
                  data=None,
                  scale: float = 1,
                  image_x: float = 0, image_y: float = 0,
@@ -102,7 +102,7 @@ class Sprite:
         Create a new sprite.
 
         Args:
-            filename (str): Filename of an image that represents the sprite.
+            name (str): name of an image that represents the sprite.
             scale (float): Scale the image up or down. Scale of 1.0 is none.
             image_x (float): X offset to sprite within sprite sheet.
             image_y (float): Y offset to sprite within sprite sheet.
@@ -128,12 +128,12 @@ class Sprite:
         self.sprite_lists: List[Any] = []
 
         self._texture: Optional[Texture]
-        if filename is not None:
+        if name is not None:
             try:
-                self._texture = load_texture(filename, image_x, image_y,
+                self._texture = load_texture(name, image_x, image_y,
                                              image_width, image_height, data=data)
             except Exception as e:
-                print(f"Unable to load {filename} {e}")
+                print(f"Unable to load {name} {e}")
                 self._texture = None
         else:
             self._texture = None
