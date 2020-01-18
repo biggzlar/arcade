@@ -92,6 +92,7 @@ class Sprite:
 
     def __init__(self,
                  filename: str = None,
+                 data=None,
                  scale: float = 1,
                  image_x: float = 0, image_y: float = 0,
                  image_width: float = 0, image_height: float = 0,
@@ -130,23 +131,20 @@ class Sprite:
         if filename is not None:
             try:
                 self._texture = load_texture(filename, image_x, image_y,
-                                             image_width, image_height)
+                                             image_width, image_height, data=data)
             except Exception as e:
                 print(f"Unable to load {filename} {e}")
                 self._texture = None
+        else:
+            self._texture = None
 
-            if self._texture:
-                self.textures = [self._texture]
-                self._width = self._texture.width * scale
-                self._height = self._texture.height * scale
-                self._texture.scale = scale
-            else:
-                self.textures = []
-                self._width = 0
-                self._height = 0
+        if self._texture:
+            self.textures = [self._texture]
+            self._width = self._texture.width * scale
+            self._height = self._texture.height * scale
+            self._texture.scale = scale
         else:
             self.textures = []
-            self._texture = None
             self._width = 0
             self._height = 0
 
